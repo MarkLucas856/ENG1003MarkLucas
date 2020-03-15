@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1584259799 source:c:\users\mark lucas\documents\matlab\eng1003\sequence project\hd sequence assesment prep\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
