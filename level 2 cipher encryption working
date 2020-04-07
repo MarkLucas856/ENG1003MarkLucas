@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void railFence2(char *message, char *cipherText, int length, int A, int B, int dir);
+int main()
+{
+    char message[]="Hello There Friend";//[CharacterLimit];            // character limit of users message
+    char ciphertext [20];                  // creates a grid 100 rows down 1000 collums accross. this is the grid characters will print on.
+    int length, dir =0;                      // i counts key integer value, j counts number of characters in users message, length is number of characters in message
+    int A =4, B=2 ;
+    length = strlen(message);
+
+    railFence2(message, ciphertext, length, A, B, dir);
+}
+                             // number of rows / rails
+    /** print UI block-----------
+
+    //printf("\nEnter the message you wish to encrypt:\n\n");
+    //fgets(message, CharacterLimit, stdin);
+   // scanf("%s", &message);
+
+   // printf("\nEnter the key# ");
+    //scanf("%d", &key);
+
+    while (length > CharacterLimit|| length <=0)   // Setting charater limit.
+    {
+        printf("Error, you have exceeded the character limit of: %d\n", CharacterLimit);
+        printf("\nEnter the message you wish to encrypt:\n\n");
+        scanf("%s", &message);
+        length = strlen(message);
+    }
+*/
+void railFence2(char *message, char *cipherText, int length, int A, int B, int dir) ///2-level cipher encryption
+ {
+    int matrix[A+1][length+1];
+    int i=0, j=0;
+
+    switch(dir)
+    {
+        case 0:
+        {
+            /** printf("\nEnter the message you wish to encrypt:\n\n");
+            fgets(message, CharacterLimit, stdin);
+            scanf("%s", &message);
+            length = strlen(message);
+            printf("\nEnter the key# ");
+            scanf("%d", &key);
+
+            while (length > CharacterLimit|| length <=0)   // Setting charater limit.
+            {
+                printf("Error, you have exceeded the character limit of: %d\n", CharacterLimit);
+                printf("\nEnter the message you wish to encrypt:\n\n");
+                scanf("%s", &message);
+                length = strlen(message);
+            }
+                */
+            for (i = 0; i <A; i++)                           // for integer value of key
+            {
+                for (j = 0; j<length; j++)                // for number of characters in users message
+                {
+                   matrix[i][j] = 0;                     // setting grid to 0, limits are the key & users message length
+                }                                       // setting entire grid to zero so we can print all non zero elements later, i.e. the characters
+            }
+                /**message tester----------------
+            for(i = 0; i<length;i++)
+            {
+                printf("  %c", message[i]);
+            } */
+            j=0,i=0;                                              // reinitialising counters to begin new loop.
+               while(j<length)
+            {
+                if(i+1>A || j+1>length)                        // tests if i or j are going past their 'key' or 'length' limits. if so, reverse i (go back up the grid)
+                {
+                    for(i = A-2; i >0; i--)                  // move down the (rows) by 1 // "key -2" is important here
+                    {
+                        matrix[i][j] = (int)message[j];    /// add each message letter  to the (ith,jth) co-ordinates to the matrix in a diagonal decrementing order.
+                        j++;                              //move accross 1 collum repeat loop
+                    }
+                }
+                else
+                {
+                    for(i = 0; i < A; i++)
+                    {
+                        matrix[i][j] = (int)message[j]; /// add each character to the (ith & jth) co-ordinates on the matrix in a diagonal incrementing order.
+                        j++;                           //move accross 1 collum repeat loop
+                    }
+                }
+            }
+
+              //  debugger------------------
+            for(i = 0; i < A; i++)                          // i is the rows or 'key'
+            {
+                printf("i = %d   ", i);                   // this frints the ith collum number
+                    for(j = 0; j < length; j++)          // j is collum number, length is the number of characters in users message
+                    {
+                        printf("%c ", matrix[i][j]);   // prints the i x j sized grid
+                    }
+                printf("\n"); // need this on seperate printf statement, messes with character printing
+
+            }
+
+            /** below prints the encoded message
+            for(i = 0; i < A; i++)                       // from 0th row to 'keys' integer value row
+            {
+                for(j = 0; j < length; j++)             // from 0th collum to message length value collum
+                {
+                    if(matrix[i][j] != 0)             // if strings element at given i & j values is not = 0
+                    {
+                    printf("%c ", matrix[i][j]);
+                       // print the strings element for given i & j values
+                    }
+                }
+            }       */
+        }
+        break;
+    }
+ }
