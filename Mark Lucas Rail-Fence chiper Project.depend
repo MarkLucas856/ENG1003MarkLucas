@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1587958049 source:c:\users\mark lucas\documents\engg1003\c3338805 cipher project\mark lucas rail-fence chiper project\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
